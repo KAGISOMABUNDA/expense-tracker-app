@@ -26,10 +26,14 @@ const router = useRouter();
 
 const register = async () => {
   try {
-    await createUserWithEmailAndPassword(auth, email.value, password.value);
-    router.push('/home'); // Redirect on success
+    const trimmedEmail = email.value.trim();
+    const trimmedPassword = password.value.trim();
+    await createUserWithEmailAndPassword(auth, trimmedEmail, trimmedPassword);
+    router.push('/home');
   } catch (err) {
     errorMessage.value = err.message;
+    console.error("Registration Error:", err);
   }
 };
+
 </script>
